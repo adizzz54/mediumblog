@@ -1,0 +1,15 @@
+CrmServiceClient svc = null;
+string password = “password”;
+string authType = “OAuth”;
+string url = “service root url”;
+string appId = “51f81489–12ee-4a9e-aaae-a2591f45987d”;
+string reDirectURI = “app://58145B91–0C36–4500–8554–080854F2AC97”;
+string loginPrompt = “Auto”;
+string ConnectionString = string.Format(“AuthType = {0};Username = {1};Password = {2}; Url = {3}; AppId={4}; RedirectUri={5};LoginPrompt={6}”, authType, userName, password, url, appId, reDirectURI, loginPrompt);
+svc = new CrmServiceClient(ConnectionString);
+if (svc.IsReady)
+{
+Guid userid = ((WhoAmIResponse)svc.Execute(new WhoAmIRequest())).UserId;
+if (userid != Guid.Empty)
+{
+log.Info(“Connection Established Successfully…”);
